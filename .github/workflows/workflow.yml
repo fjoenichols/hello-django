@@ -75,7 +75,6 @@ jobs:
             [hello]
             hello-0 ansible_host=45.76.236.55
           options: |
-            --inventory .hosts
             --extra-vars "db_name=${{secrets.DB_NAME}} 
                   db_user=${{ secrets.DB_USER }}
                   db_password=${{ secrets.DB_PASSWORD }}
