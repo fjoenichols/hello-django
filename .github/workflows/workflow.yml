@@ -64,8 +64,18 @@ jobs:
           playbook: playbook.yml
           directory: ./ansible
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          inventory: |
+            [all:children]
+            hello
+
+            [all:vars]
+            ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+            ansible_user='root'
+
+            [hello]
+            hello-0 ansible_host=45.76.236.55
           options: |
-            --inventory inventory
+            --inventory .hosts
             --extra-vars "db_name=${{secrets.DB_NAME}} 
                   db_user=${{ secrets.DB_USER }}
                   db_password=${{ secrets.DB_PASSWORD }}
