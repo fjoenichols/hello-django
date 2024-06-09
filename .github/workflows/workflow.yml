@@ -70,12 +70,12 @@ jobs:
 
             [all:vars]
             ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-            ansible_user='root'
+            ansible_user=${{ secrets.ANSIBLE_USER }} 
 
             [hello]
-            hello-0 ansible_host=45.76.236.55
+            hello-0 ansible_host=${{ secrets.ANSIBLE_HOST }} 
           options: |
-            --extra-vars "db_name=${{secrets.DB_NAME}} 
+            --extra-vars "db_name=${{ secrets.DB_NAME }} 
                   db_user=${{ secrets.DB_USER }}
                   db_password=${{ secrets.DB_PASSWORD }}
                   db_host=${{ secrets.DB_HOST }}
