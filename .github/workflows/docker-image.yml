@@ -3,8 +3,6 @@ name: Create and publish a Docker image
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 env:
   REGISTRY: ghcr.io
@@ -52,19 +50,3 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       
-      - name: Deploy the Application
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: playbook.yml
-          directory: ./ansible
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          options: |
-            --inventory inventory
-            --extra-vars "db_name=${{secrets.DB_NAME}} 
-                  db_user=${{ secrets.DB_USER }}
-                  db_password=${{ secrets.DB_PASSWORD }}
-                  db_host=${{ secrets.DB_HOST }}
-                  db_port=${{ secrets.DB_PORT }}
-                  allowed_hosts_url=${{ secrets.ALLOWED_HOSTS_URL }}
-                  secret_key=${{ secrets.SECRET_KEY }}
-                  django_settings_module=${{ secrets.DJANGO_SETTINGS_MODULE }}"
