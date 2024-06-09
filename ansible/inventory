@@ -1,0 +1,9 @@
+[all:children]
+hello
+
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_user='root'
+
+[hello]
+hello-0 ansible_host=45.76.236.55
