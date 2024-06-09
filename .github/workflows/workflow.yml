@@ -55,6 +55,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - name: Deploy the Application
         uses: dawidd6/action-ansible-playbook@v2
         with:
